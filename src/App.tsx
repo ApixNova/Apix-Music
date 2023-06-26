@@ -28,7 +28,7 @@ function App() {
         <i className="fa-solid fa-music"></i>
       </div>
       {/* Song list :  */}
-      <div className="songlist">
+      <div className="songlist" id="first">
         <p>{SongList[0].name}</p>
         <p>{SongList[0].artist}</p>
       </div>

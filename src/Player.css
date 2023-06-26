@@ -14,17 +14,30 @@
   bottom: 0;
   background: white;
   width: 100%;
+  border: 2px solid rgb(101, 101, 180);
 }
 
 .big {
   height: 100%;
   width: 100%;
   position: fixed;
-  top: 50px;
+  bottom: 0;
   height: 100%;
   background: rgb(224, 211, 211);
-  border: 2px solid rgb(101, 101, 180);
+
   box-sizing: border-box;
+  animation: 900ms pop;
+}
+
+@keyframes pop {
+  from {
+    height: 70px;
+    background: white;
+  }
+  to {
+    height: 100%;
+    background: rgb(224, 211, 211);
+  }
 }
 
 /* Styling the range imput */
