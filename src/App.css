@@ -1,0 +1,37 @@
+#navbar {
+  width: 100%;
+  height: 50px;
+  background: rgb(224, 220, 220);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  margin-bottom: 30px;
+}
+#navbar i {
+  color: rgb(156, 160, 151);
+  font-size: 0.7em;
+  transform: translate(0, -5px);
+}
+#navbar p {
+  font-family: "Quicksand", sans-serif;
+  font-size: 1.5em;
+  font-weight: 500;
+  color: rgb(238, 35, 35);
+}
+h1 {
+  font-family: "Libre Franklin";
+  color: rgb(76, 219, 119);
+}
+
+/* Song list: */
+
+.songlist {
+  height: 50px;
+  background: rgb(224, 211, 211);
+  border: 2px solid rgb(101, 101, 180);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 1px;
+}
