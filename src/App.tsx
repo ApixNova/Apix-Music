@@ -1,19 +1,12 @@
 import { useState } from "react";
 import "./App.css";
 import Player from "./Player";
-import badMemories from "./songs/bad-memories.mp3";
+import currentSong from "./songs/Millbrook - Overdrive (ft. Ellerslie) [NCS Release].mp3";
 
-const SongList = [
-  {
-    name: "Faded",
-    artist: "Alan Walker",
-  },
-  {
-    name: "Song2",
-    artist: "Yea I'm original hehe",
-  },
-];
-
+const Song = {
+  name: "Overdrive (ft. Elleslie)",
+  artist: "Millbrook",
+};
 function App() {
   const [playerBig, setPlayerBig] = useState(false);
 
@@ -24,21 +17,16 @@ function App() {
   return (
     <>
       <div id="navbar">
-        <p>just vibe</p>
+        <p>apix music</p>
         <i className="fa-solid fa-music"></i>
       </div>
-      {/* Song list :  */}
       <div className="songlist" id="first">
-        <p>{SongList[0].name}</p>
-        <p>{SongList[0].artist}</p>
+        <p>{Song.name}</p>
+        <p>{Song.artist}</p>
+        <i className="fa-regular fa-heart"></i>
+        <i className="fa-solid fa-heart"></i>
       </div>
-      {SongList.map((song) => (
-        <div className="songlist">
-          <p>{song.name}</p>
-          <p>{song.artist}</p>
-        </div>
-      ))}
-      <Player onClick={handleClick} size={playerBig} song={badMemories} />
+      <Player onClick={handleClick} size={playerBig} song={currentSong} />
     </>
   );
 }

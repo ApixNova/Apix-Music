@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./Player.css";
+import image from "./img/galaxy.jpg";
 
 export default function Player({ onClick, size, song }: any) {
   const [music, setMusic] = useState({
@@ -75,21 +76,32 @@ export default function Player({ onClick, size, song }: any) {
           }
         }}
       >
-        <audio id="music" src={song}></audio>
-        <div onClick={() => handlePlayPause()}>
-          {music.playing ? (
-            <i className="fa-solid fa-play"></i>
-          ) : (
-            <i className="fa-solid fa-pause"></i>
-          )}
+        {size && <img src={image}></img>}
+
+        {size && (
+          <div>
+            <h2 id="title">Overdrive (ft. Elleslie)</h2>
+            <h3 id="artist">Millbrook</h3>
+          </div>
+        )}
+
+        <div id="controls">
+          <audio id="music" src={song}></audio>
+          <div onClick={() => handlePlayPause()}>
+            {music.playing ? (
+              <i className="fa-solid fa-play"></i>
+            ) : (
+              <i className="fa-solid fa-pause"></i>
+            )}
+          </div>
+          <input
+            type="range"
+            style={{ background: "inherit" }}
+            value={music.time}
+            onChange={(e) => handleChange(parseInt(e.target.value))}
+          ></input>
+          <p>{convertTime(music.time)}</p>
         </div>
-        <input
-          type="range"
-          style={{ background: "inherit" }}
-          value={music.time}
-          onChange={(e) => handleChange(parseInt(e.target.value))}
-        ></input>
-        <p>{convertTime(music.time)}</p>
       </div>
     </>
   );

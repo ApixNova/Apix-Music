@@ -1,11 +1,36 @@
 #player {
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 
 #player i {
   font-size: 2.5rem;
+}
+
+img {
+  width: 60%;
+  max-width: 300px;
+  margin-bottom: 50px;
+  box-shadow: rgba(15, 7, 58, 0.9) 0px 4px 15px;
+  overflow: hidden;
+}
+
+#title,
+#artist {
+  text-align: center;
+}
+
+#artist {
+  color: rgb(63, 55, 55);
+}
+
+#controls {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 90%;
 }
 
 .small {
@@ -23,7 +48,7 @@
   position: fixed;
   bottom: 0;
   height: 100%;
-  background: rgb(224, 211, 211);
+  background: rgb(207, 210, 219);
 
   box-sizing: border-box;
   animation: 900ms pop;
@@ -32,11 +57,11 @@
 @keyframes pop {
   from {
     height: 70px;
-    background: white;
+    background: rgb(224, 214, 215);
   }
   to {
     height: 100%;
-    background: rgb(224, 211, 211);
+    background: rgb(207, 210, 219);
   }
 }
 
