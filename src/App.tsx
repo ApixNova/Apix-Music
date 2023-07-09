@@ -9,9 +9,18 @@ const Song = {
 };
 function App() {
   const [playerBig, setPlayerBig] = useState(false);
+  const [like, setLike] = useState(false);
+  const [playerOpen, setPlayerOpen] = useState(false);
 
   function handleClick() {
     setPlayerBig((prev) => !prev);
+  }
+
+  function handleClickOnList(e: React.MouseEvent<HTMLElement>) {
+    if ((e.target as HTMLDivElement).id === "first") {
+      setPlayerOpen(true);
+      return handleClick();
+    }
   }
 
   return (
@@ -20,13 +29,22 @@ function App() {
         <p>apix music</p>
         <i className="fa-solid fa-music"></i>
       </div>
-      <div className="songlist" id="first">
+      <div
+        className="songlist"
+        id="first"
+        onClick={(e) => handleClickOnList(e)}
+      >
         <p>{Song.name}</p>
         <p>{Song.artist}</p>
-        <i className="fa-regular fa-heart"></i>
-        <i className="fa-solid fa-heart"></i>
+        <i
+          id="like-button"
+          onClick={() => setLike((prev) => !prev)}
+          className={!like ? "fa-regular fa-heart" : "fa-solid fa-heart pulse"}
+        ></i>
       </div>
-      <Player onClick={handleClick} size={playerBig} song={currentSong} />
+      {playerOpen && (
+        <Player onClick={handleClick} size={playerBig} song={currentSong} />
+      )}
     </>
   );
 }

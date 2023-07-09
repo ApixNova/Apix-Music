@@ -54,6 +54,19 @@ img {
   animation: 900ms pop;
 }
 
+#full-player {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  gap: 70px;
+  margin-top: 20px;
+  align-items: center;
+}
+
+#big-button i {
+  font-size: 4rem;
+}
+
 @keyframes pop {
   from {
     height: 70px;
