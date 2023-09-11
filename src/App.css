@@ -26,7 +26,7 @@ h1 {
   font-family: "Libre Franklin";
   color: rgb(76, 219, 119);
 }
-#like-button {
+.like-button {
   color: rgb(22, 2, 2);
   font-size: 1.4rem;
 }
@@ -59,6 +59,6 @@ h1 {
   margin: 10px auto 1px auto;
 }
 
-#first {
+#playlist {
   margin-top: 100px;
 }
