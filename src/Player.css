@@ -12,6 +12,7 @@
 img {
   width: 60%;
   max-width: 300px;
+  margin-top: 70px;
   margin-bottom: 50px;
   box-shadow: rgba(15, 7, 58, 0.9) 0px 4px 15px;
   overflow: hidden;

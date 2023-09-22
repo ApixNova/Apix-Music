@@ -38,7 +38,7 @@ export default function Player({ onClick, size, song }: any) {
     });
   }
   useEffect(() => {
-    console.log("use effect triggered");
+    // console.log("use effect triggered");
     let current = Math.round(selectedSong().currentTime);
 
     // Since setInterval starts after 1 sec, handle the value 'time' instantly:
