@@ -2,7 +2,13 @@ import { useEffect, useState } from "react";
 import "./Player.css";
 import image from "./img/galaxy.jpg";
 
-export default function Player({ onClick, size, song }: any) {
+export default function Player({
+  onClick,
+  size,
+  song,
+  playPrevious,
+  playNext,
+}: any) {
   const [music, setMusic] = useState({
     playing: true,
     time: 0,
@@ -99,13 +105,13 @@ export default function Player({ onClick, size, song }: any) {
 
         {size && (
           <div>
-            <h2 id="title">Overdrive (ft. Elleslie)</h2>
-            <h3 id="artist">Millbrook</h3>
+            <h2 id="title">{song.name}</h2>
+            <h3 id="artist">{song.artist}</h3>
           </div>
         )}
 
         <div id="controls">
-          <audio id="music" src={song} preload="metadata"></audio>
+          <audio id="music" src={song.file} preload="metadata"></audio>
           {!size && <PlayButton />}
           <p>{convertTime(music.time)}</p>
           <input
@@ -120,14 +126,24 @@ export default function Player({ onClick, size, song }: any) {
         {size && (
           <div id="full-player">
             <i
-              onClick={() => handleChange(0)}
+              id="playPrevious"
+              onClick={() => {
+                if (music.time >= 3) {
+                  handleChange(0);
+                } else {
+                  if (!playPrevious()) {
+                    handleChange(0);
+                  }
+                }
+              }}
               className="fa-solid fa-backward-step"
             ></i>
             <div id="big-button">
               <PlayButton />
             </div>
             <i
-              onClick={() => handleChange(maxTime())}
+              id="playNext"
+              onClick={() => playNext()}
               className="fa-solid fa-forward-step"
             ></i>
           </div>
