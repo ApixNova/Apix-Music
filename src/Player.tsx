@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import "./Player.css";
 import image from "./img/galaxy.jpg";
 
@@ -8,43 +8,25 @@ export default function Player({
   song,
   playPrevious,
   playNext,
+  handlePlayPause,
+  selectedSong,
+  updateTime,
+  music,
 }: any) {
-  const [music, setMusic] = useState({
-    playing: true,
-    time: 0,
-  });
-
-  function selectedSong() {
-    return document.getElementById("music") as HTMLAudioElement;
-  }
-
   function maxTime() {
     if (selectedSong() != null) {
-      return Math.round(selectedSong().duration);
+      return Number.isNaN(selectedSong().duration)
+        ? 0
+        : Math.round(selectedSong().duration);
     }
     return 0;
   }
 
-  function handlePlayPause() {
-    setMusic((prev) => {
-      const clone = structuredClone(prev);
-      clone.playing = !prev.playing;
-      return clone;
-    });
-    music.playing ? selectedSong().play() : selectedSong().pause();
-    console.log(music.playing);
-  }
-
-  function updateTime() {
-    let current = Math.round(selectedSong().currentTime);
-    setMusic((prev) => {
-      const clone = structuredClone(prev);
-      clone.time = current;
-      return clone;
-    });
-  }
   useEffect(() => {
     // console.log("use effect triggered");
+    if (selectedSong().currentTime == selectedSong().duration) {
+      playNext();
+    }
     let current = Math.round(selectedSong().currentTime);
 
     // Since setInterval starts after 1 sec, handle the value 'time' instantly:
@@ -61,7 +43,6 @@ export default function Player({
 
   function handleChange(value: number) {
     selectedSong().currentTime = value;
-    console.log(value);
     updateTime();
   }
 
@@ -75,7 +56,7 @@ export default function Player({
     }
     let seconds = time % 60;
     let minutes = (time - seconds) / 60;
-    return minutes + ":" + displaySec(seconds);
+    return Number.isNaN(time) ? "0:00" : minutes + ":" + displaySec(seconds);
   }
 
   function PlayButton() {
@@ -111,7 +92,7 @@ export default function Player({
         )}
 
         <div id="controls">
-          <audio id="music" src={song.file} preload="metadata"></audio>
+          <audio id="music" src={song.file} preload="metadata" autoPlay></audio>
           {!size && <PlayButton />}
           <p>{convertTime(music.time)}</p>
           <input
@@ -121,7 +102,7 @@ export default function Player({
             value={music.time}
             onChange={(e) => handleChange(parseInt(e.target.value))}
           ></input>
-          <p>{convertTime(maxTime())}</p>
+          <p id={!size ? "max-time" : "max"}>{convertTime(maxTime())}</p>
         </div>
         {size && (
           <div id="full-player">
@@ -143,7 +124,10 @@ export default function Player({
             </div>
             <i
               id="playNext"
-              onClick={() => playNext()}
+              onClick={() => {
+                playNext();
+                handlePlayPause(true);
+              }}
               className="fa-solid fa-forward-step"
             ></i>
           </div>

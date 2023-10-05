@@ -25,12 +25,41 @@ const demoPlaylist = [
     id: 3,
   },
 ];
+
 function App() {
   const [playerBig, setPlayerBig] = useState(false);
   const [like, setLike] = useState<number[]>([]);
   const [playerOpen, setPlayerOpen] = useState(false);
   // id of current song:
   const [current, setCurrentSong] = useState(1);
+  // const [playing, setPlaying] = useState(false)
+  const [music, setMusic] = useState({
+    playing: false,
+    time: 0,
+  });
+  function handlePlayPause(justPlay = false) {
+    setMusic((prev) => {
+      const clone = structuredClone(prev);
+      if (justPlay == true) {
+        clone.playing = false;
+      } else {
+        clone.playing = !prev.playing;
+      }
+      return clone;
+    });
+    music.playing ? selectedSong().play() : selectedSong().pause();
+  }
+  function selectedSong() {
+    return document.getElementById("music") as HTMLAudioElement;
+  }
+  function updateTime() {
+    let current = Math.round(selectedSong().currentTime);
+    setMusic((prev) => {
+      const clone = structuredClone(prev);
+      clone.time = current;
+      return clone;
+    });
+  }
 
   function handleClick() {
     setPlayerBig((prev) => !prev);
@@ -60,9 +89,13 @@ function App() {
 
   function handleClickOnList(e: React.MouseEvent<HTMLElement>) {
     if ((e.target as HTMLDivElement).className === "songlist") {
-      console.log((e.target as HTMLDivElement).id);
       setCurrentSong(Number.parseInt((e.target as HTMLDivElement).id));
       setPlayerOpen(true);
+      setMusic((prev) => {
+        const clone = structuredClone(prev);
+        clone.playing = false;
+        return clone;
+      });
       return handleClick();
     }
   }
@@ -77,10 +110,18 @@ function App() {
         {demoPlaylist.map((song) => {
           return (
             <div
-              className="songlist"
+              className={
+                current == song.id && playerOpen
+                  ? "songlist colored"
+                  : "songlist"
+              }
               id={song.id.toString()}
+              key={song.id.toString()}
               onClick={(e) => handleClickOnList(e)}
             >
+              {current == song.id && playerOpen && (
+                <i className="fa-solid fa-play is-playing"></i>
+              )}
               <p className="song-name">{song.name}</p>
               <p className="song-artist">{song.artist}</p>
               <i
@@ -110,6 +151,10 @@ function App() {
           song={demoPlaylist.filter((s) => s.id == current)[0]}
           playPrevious={playPrevious}
           playNext={playNext}
+          handlePlayPause={handlePlayPause}
+          selectedSong={selectedSong}
+          updateTime={updateTime}
+          music={music}
         />
       )}
     </>

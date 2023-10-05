@@ -12,8 +12,8 @@
 img {
   width: 60%;
   max-width: 300px;
-  margin-top: 70px;
-  margin-bottom: 50px;
+  margin-top: 150px;
+  margin-bottom: 70px;
   box-shadow: rgba(15, 7, 58, 0.9) 0px 4px 15px;
   overflow: hidden;
 }
@@ -29,18 +29,35 @@ img {
 
 #controls {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
+  gap: 5px;
   width: 90%;
 }
 
+/* max time on the small player */
+#max-time {
+  font-size: 1em;
+}
+
+@media screen and (max-width: 424px) {
+  #max-time {
+    font-size: 0;
+  }
+  /* input[type="range"] {
+    height: 27px;
+    appearance: none;
+    margin: 5px 0 !important;
+    width: 75%;
+  } */
+}
 .small {
   height: 70px;
   position: fixed;
   bottom: 0;
   background: white;
-  width: 100%;
-  border: 2px solid rgb(101, 101, 180);
+  width: calc(100% - 6px);
+  border: 3px solid rgb(101, 101, 180);
 }
 
 .big {
@@ -50,7 +67,6 @@ img {
   bottom: 0;
   height: 100%;
   background: rgb(207, 210, 219);
-
   box-sizing: border-box;
   animation: 900ms pop;
 }
